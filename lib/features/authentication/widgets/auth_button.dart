@@ -5,13 +5,15 @@ import 'package:tiktok_clone/constants/sizes.dart';
 class AuthButton extends StatelessWidget {
   final String text;
   final FaIcon icon;
-  final void Function() gesture;
+  final void Function()? gesture;
+  // final Function() gesture;
 
   const AuthButton({
     super.key,
     required this.text,
     required this.icon,
-    required this.gesture,
+    this.gesture,
+    // required this.gesture,
   });
 
   @override
@@ -19,7 +21,9 @@ class AuthButton extends StatelessWidget {
     return FractionallySizedBox(
       widthFactor: 1,
       child: GestureDetector(
-        onTap: () => gesture(),
+        //함수가 null이 아닌 경우에만 호출
+        onTap: () => gesture?.call(),
+        //onTap: () => gesture(),
         child: Container(
           padding: const EdgeInsets.all(
             Sizes.size14,
@@ -30,6 +34,7 @@ class AuthButton extends StatelessWidget {
               width: Sizes.size1,
             ),
           ),
+          //stack으로 전체 가운데 정렬 후 Alignment 옵션과 위젯으로 위치 조정
           child: Stack(
             alignment: Alignment.center,
             children: [

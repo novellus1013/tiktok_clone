@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
@@ -16,12 +17,12 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  void onEmailSignUp() {
-    print("email login");
-  }
-
-  void onAppleSignUp() {
-    print("apple 로그인");
+  void _onEmailTap(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const EmailScreen(),
+      ),
+    );
   }
 
   @override
@@ -56,20 +57,20 @@ class SignUpScreen extends StatelessWidget {
               AuthButton(
                 icon: const FaIcon(FontAwesomeIcons.user),
                 text: "Use email & password",
-                gesture: onEmailSignUp,
+                // 원래는 함수 자체를 gesture : _onEmailTap 처럼 전달해주어야 하지만 _onEmailTap이 매개변수를 받기 때문에 람다 함수로 전달
+                gesture: () => _onEmailTap(context),
               ),
               Gaps.v16,
-              AuthButton(
-                icon: const FaIcon(FontAwesomeIcons.apple),
+              const AuthButton(
+                icon: FaIcon(FontAwesomeIcons.apple),
                 text: "Continue with Apple",
-                gesture: onAppleSignUp,
               ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade50,
         elevation: 2,
         child: Padding(
           padding: const EdgeInsets.symmetric(
