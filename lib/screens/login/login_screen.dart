@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/screens/sign_up/sign_up_screen.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+// 내가 작성한 코드
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  void onSignUpTap(BuildContext context) {
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: const SafeArea(
         minimum: EdgeInsets.symmetric(
-          vertical: 150.0,
           horizontal: Sizes.size40,
         ),
         child: Column(
           children: [
             Text(
-              'Sign up for TikTok',
+              'Log in for TikTok',
               style: TextStyle(
                 fontSize: Sizes.size28,
                 fontWeight: FontWeight.bold,
@@ -24,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
             ),
             Gaps.v20,
             Text(
-              'Crate a profile, follow other accounts, make your own videos, and more.',
+              'Manage your account, check notification, comment on videos, and more.',
             ),
           ],
         ),
@@ -35,17 +40,20 @@ class SignUpScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              'Already have an account?',
+              "Don't have an account?",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
               ),
             ),
             Gaps.h10,
-            Text(
-              'Login',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () => onSignUpTap(context),
+              child: Text(
+                "Sign Up",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
