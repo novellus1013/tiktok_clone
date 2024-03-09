@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
@@ -96,8 +94,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
               Gaps.v16,
               TextField(
                 controller: _passwordController,
-                //onSubmitted => onEditingComplete처럼 키보드로 제출하지만, value 값을 모를 때 사용.
                 onEditingComplete: _onSubmit,
+                //비밀번호 암호화 표시
                 obscureText: _obscureText,
                 autocorrect: false,
                 decoration: InputDecoration(
