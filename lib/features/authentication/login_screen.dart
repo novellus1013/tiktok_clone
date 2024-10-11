@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -36,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                   fontSize: Sizes.size16,
                 ),
                 textAlign: TextAlign.center,
-              )
+              ),
             ],
           ),
         ),
