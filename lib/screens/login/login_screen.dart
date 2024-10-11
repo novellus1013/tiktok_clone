@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/screens/login/login_screen.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
-  void onLoginTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+  //화면이 stack으로 쌓이기 때문에 push 하면 pop 필요
+  void onSignUpTap(BuildContext context) {
+    Navigator.of(context).pop();
   }
 
   @override
@@ -26,7 +22,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               Gaps.v80,
               Text(
-                "Sign up for TikTok",
+                "Log in to TikTok",
                 style: TextStyle(
                   fontSize: Sizes.size24,
                   fontWeight: FontWeight.w700,
@@ -34,7 +30,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               Gaps.v20,
               Text(
-                "Create a profile, follow other accounts, make your own videos, and more.",
+                "Manage your account, check notifications, comment on videos, and more.",
                 style: TextStyle(
                   color: Colors.black45,
                   fontSize: Sizes.size16,
@@ -58,10 +54,9 @@ class SignUpScreen extends StatelessWidget {
               const Text("Already have an account?"),
               Gaps.h5,
               GestureDetector(
-                //익명 함수나 람다 함수 사용!
-                onTap: () => onLoginTap(context),
+                onTap: () => onSignUpTap(context),
                 child: Text(
-                  "Login",
+                  "Sign up",
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600,
