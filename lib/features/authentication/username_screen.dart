@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
 class UsernameScreen extends StatefulWidget {
   const UsernameScreen({super.key});
@@ -15,9 +16,11 @@ class _UsernameScreenState extends State<UsernameScreen> {
   String _username = "";
 
   @override
+  //위젯이 처음 생성될 때 1회만 실행
   void initState() {
     super.initState();
 
+    // addListener는 _usernameController.text 값이 변경될 때 마다 콜백 함수를 트리거 -> setState를 호출
     _usernameController.addListener(
       () {
         setState(() {
@@ -25,6 +28,12 @@ class _UsernameScreenState extends State<UsernameScreen> {
         });
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -76,34 +85,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
               ),
               cursorColor: Theme.of(context).primaryColor,
             ),
-            Gaps.v16,
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: AnimatedContainer(
-                duration: const Duration(
-                  milliseconds: 300,
-                ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: Sizes.size16,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    Sizes.size5,
-                  ),
-                  color: _username.isEmpty
-                      ? Colors.grey.shade300
-                      : Theme.of(context).primaryColor,
-                ),
-                child: const Text(
-                  'Next',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            )
+            Gaps.v28,
+            //FormButton에서는 username이 뭔지 알 필요가 없고, username이 empty인지 아닌지만 알면 됨.
+            FormButton(disabled: _username.isEmpty),
           ],
         ),
       ),
