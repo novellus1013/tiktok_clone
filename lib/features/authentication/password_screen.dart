@@ -39,23 +39,18 @@ class _PasswordScreenState extends State<PasswordScreen> {
     super.dispose();
   }
 
-  // //validation
-  // bool _isPasswordValid() {
-  //   if (_password.isEmpty) return false;
-  //   //정규 표현식
-  //   final regExp = RegExp(
-  //     r"^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@$!%*#?&\^])[A-Za-z0-9@$!%*#?&\^]{8,}$",
-  //   );
-  //   return regExp.hasMatch(_password);
-  // }
-
   bool _isPasswordLengthValid() {
-    final regExp = RegExp(r"^.{8,20}$");
-    return regExp.hasMatch(_password);
+    // final regExp = RegExp(r"^.{8,20}$");
+    // return regExp.hasMatch(_password);
+
+    return _password.isNotEmpty &&
+        _password.length >= 8 &&
+        _password.length <= 20;
   }
 
   bool _isPasswordContainsSpecialChar() {
-    final regExp = RegExp(r"(?=.*[@$!%*#?&\^])");
+    final regExp = RegExp(
+        r"^(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*#?&\^])[A-Za-z0-9@$!%*#?&\^]+$");
     return regExp.hasMatch(_password);
   }
 
@@ -184,11 +179,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
                         : Colors.grey.shade400,
                   ),
                   Gaps.h10,
-                  const Flexible(
-                    child: Text(
-                      softWrap: true,
-                      "Password must contain at least one special character. [@, \$, !, %, , #, ?, &, ^]",
-                    ),
+                  const Text(
+                    "Letters, numbers, and special characters",
                   ),
                 ],
               ),
