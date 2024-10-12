@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/authentication/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -42,13 +42,13 @@ class LoginScreen extends StatelessWidget {
               ),
               Gaps.v20,
               AuthButton(
-                screen: EmailScreen(),
+                screen: UsernameScreen(),
                 icon: FaIcon(FontAwesomeIcons.user),
                 text: "Use email and password",
               ),
               Gaps.v16,
               // AuthButton(
-              //   function: () {},
+              //   screen: ,
               //   icon: const FaIcon(
               //     FontAwesomeIcons.facebook,
               //     color: Colors.blue,
@@ -57,13 +57,13 @@ class LoginScreen extends StatelessWidget {
               // ),
               // Gaps.v16,
               // AuthButton(
-              //   function: () {},
+              //   screen: ,
               //   icon: const FaIcon(FontAwesomeIcons.apple),
               //   text: "Continue with Apple",
               // ),
               // Gaps.v16,
               // AuthButton(
-              //   function: () {},
+              //   screen: ,
               //   icon: const FaIcon(FontAwesomeIcons.google),
               //   text: "Continue with Google",
               // ),

@@ -52,6 +52,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               Gaps.v16,
               // AuthButton(
+              //   screen: () {},
               //   icon: FaIcon(
               //     FontAwesomeIcons.facebook,
               //     color: Colors.blue,
@@ -60,13 +61,13 @@ class SignUpScreen extends StatelessWidget {
               // ),
               // Gaps.v16,
               // AuthButton(
-              //   function: () {},
+              //   screen: () {},
               //   icon: const FaIcon(FontAwesomeIcons.apple),
               //   text: "Continue with Apple",
               // ),
               // Gaps.v16,
               // AuthButton(
-              //   function: () {},
+              //   screen: () {},
               //   icon: const FaIcon(FontAwesomeIcons.google),
               //   text: "Continue with Google",
               // ),
