@@ -100,7 +100,10 @@ class _UsernameScreenState extends State<UsernameScreen> {
             //FormButton에서는 username이 뭔지 알 필요가 없고, username이 empty인지 아닌지만 알면 됨.
             GestureDetector(
                 onTap: _onNextTap,
-                child: FormButton(disabled: _username.isEmpty)),
+                child: FormButton(
+                  disabled: _username.isEmpty,
+                  buttonText: 'Next',
+                )),
           ],
         ),
       ),

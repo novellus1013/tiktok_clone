@@ -17,6 +17,9 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
 
   DateTime initialDate = DateTime.now();
 
+  //DateTime에 add가 가능하다는 것, Duration widget에 가장 큰 값은 days.
+  // DateTime maxDate = DateTime.now().add(Duration(days: -(365 * 12)));
+
   @override
   //위젯이 처음 생성될 때 1회만 실행
   void initState() {
@@ -104,7 +107,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
             //FormButton에서는 username이 뭔지 알 필요가 없고, username이 empty인지 아닌지만 알면 됨.
             GestureDetector(
               onTap: _onNextTap,
-              child: const FormButton(disabled: false),
+              child: const FormButton(
+                disabled: false,
+                buttonText: 'Next',
+              ),
             ),
           ],
         ),

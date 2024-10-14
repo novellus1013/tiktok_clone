@@ -27,7 +27,7 @@ class TikTokApp extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       home: const SignUpScreen(),
     );
