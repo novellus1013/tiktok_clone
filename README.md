@@ -1,16 +1,27 @@
-# tiktok_clone
+# 캐시하트 (CashHeart)
 
-A new Flutter project.
+캐시하트는 유저의 축의금 내역을 관리해주는 앱입니다. 유저는 지인들과 주고받은 축의금 기록을 손쉽게 등록하고 관리할 수 있으며, 거래 내역과 총 금액을 빠르게 확인할 수 있습니다.
 
-## Getting Started
+## 주요 기능
 
-This project is a starting point for a Flutter application.
+- **회원가입 및 로그인**: 구글, 카카오톡, 네이버, 이메일을 통한 간편 회원가입 및 로그인 기능.
+- **지인 관리**: 유저가 축의금을 주고받는 지인 정보를 등록, 수정, 삭제할 수 있습니다.
+- **축의금 내역 관리**: 주고받은 축의금 내역을 기록하고 조회할 수 있으며, 금액, 날짜, 장소, 메모 등을 추가할 수 있습니다.
+- **총액 계산**: 특정 지인과의 축의금 총액을 계산하여 유저에게 표시합니다.
+- **온보딩 화면**: 앱 사용 초기 설정을 돕는 온보딩 화면을 제공합니다.
+- **바텀 앱바**: 손쉽게 지인 목록과 설정 페이지를 오갈 수 있는 하단 네비게이션 바.
 
-A few resources to get you started if this is your first Flutter project:
+## Todos
+- [ ] **사용자 인증**: 구글, 카카오톡, 네이버, 일반 회원가입 및 로그인 기능 구현.
+- [ ] **온보딩 화면**: 사용자를 위한 초기 온보딩 화면 구현.
+- [ ] **지인 관리**: 지인 추가, 수정, 삭제 기능 구현.
+- [ ] **축의금 기록**: 주고받은 축의금 내역 기록 및 조회 기능 구현.
+- [ ] **총액 계산**: 특정 지인과 주고받은 축의금 총액을 계산하는 기능 구현.
+- [ ] **바텀 네비게이션 바**: 지인 목록과 설정 화면을 오갈 수 있는 하단 앱바 구현.
+- [ ] **플로팅 액션 버튼**: 축의금 기록 추가를 위한 플로팅 버튼 구현.
+- [ ] **백엔드 통합**: Supabase와 연동하여 데이터 저장 및 관리를 처리.
+- [ ] **다국어 지원**: 한국어와 영어를 지원하는 다국어 기능 추가.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 개발 일정
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **시작일**: 2024.10.16 
