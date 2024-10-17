@@ -42,10 +42,11 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
 
   //argument로 Buildcontext를 받지 않는 이유 => Stateful widget에서 State 안에 있다면, 어디서든 context를 사용 가능
   void _onNextTap() {
-    Navigator.of(context).push(
+    Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => const InterestsScreen(),
       ),
+      (route) => false,
     );
   }
 
