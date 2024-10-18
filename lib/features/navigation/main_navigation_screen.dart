@@ -4,6 +4,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/navigation/stf_screen.dart';
 import 'package:tiktok_clone/features/navigation/widgets/nav_tab.dart';
+import 'package:tiktok_clone/features/navigation/widgets/post_video_button.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -19,6 +20,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void _onPostVideoButtonTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        // fullscreenDialog: true,
+        builder: (context) {
+          return Scaffold(
+            appBar: AppBar(title: const Text("Record video")),
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -63,6 +77,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 isSelected: _selectedIndex == 0,
                 onTap: () => _onTap(0),
               ),
+              Gaps.h24,
               NavTab(
                 text: 'Discover',
                 icon: FontAwesomeIcons.compass,
@@ -70,6 +85,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 isSelected: _selectedIndex == 1,
                 onTap: () => _onTap(1),
               ),
+              GestureDetector(
+                onTap: _onPostVideoButtonTap,
+                child: const PostVideoButton(),
+              ),
+              Gaps.h24,
               NavTab(
                 text: 'Inbox',
                 icon: FontAwesomeIcons.message,
