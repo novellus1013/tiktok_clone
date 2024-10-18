@@ -15,6 +15,19 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
+  bool _isPressed = false;
+
+  void _onLongPressed() {
+    setState(() {
+      _isPressed = true;
+    });
+  }
+
+  void _onLongPressedUp() {
+    setState(() {
+      _isPressed = false;
+    });
+  }
 
   void _onTap(int index) {
     setState(() {
@@ -77,7 +90,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 isSelected: _selectedIndex == 0,
                 onTap: () => _onTap(0),
               ),
-              Gaps.h24,
               NavTab(
                 text: 'Discover',
                 icon: FontAwesomeIcons.compass,
@@ -85,9 +97,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 isSelected: _selectedIndex == 1,
                 onTap: () => _onTap(1),
               ),
+              Gaps.h24,
               GestureDetector(
                 onTap: _onPostVideoButtonTap,
-                child: const PostVideoButton(),
+                onLongPress: _onLongPressed,
+                onLongPressUp: _onLongPressedUp,
+                child: PostVideoButton(
+                  isPressed: _isPressed,
+                ),
               ),
               Gaps.h24,
               NavTab(
