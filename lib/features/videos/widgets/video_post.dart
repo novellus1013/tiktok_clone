@@ -73,12 +73,17 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
+    if (!mounted) return;
     //유저가 scroll로 화면을 일부만 끌어올리면 재생되지 않고, 완전히 전환하면 재생됨
     if (info.visibleFraction == 1 &&
         //pause하고 새로고침하면, 2자기 조건식을 모두 만족해서 pause된 상태로 재생되는 문제가 발생 => !_isPaused라는 조건식 추가
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
+    }
+    //동영상이 재생중이고, 동영상이 전혀 안보이는 상태라면 즉 homeTap을 벗어났다면 pause
+    if (_videoPlayerController.value.isPlaying && info.visibleFraction == 0) {
+      _onTogglePause();
     }
   }
 
@@ -120,7 +125,6 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // print(_animationController.value);
     return VisibilityDetector(
       key: Key("${widget.index}"),
       onVisibilityChanged: _onVisibilityChanged,
