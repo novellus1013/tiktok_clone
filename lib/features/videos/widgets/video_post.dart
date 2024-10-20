@@ -19,9 +19,15 @@ class VideoPost extends StatefulWidget {
   State<VideoPost> createState() => _VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost> {
+class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset("assets/videos/test_video.mp4");
+
+  late AnimationController _animationController;
+
+  final Duration _animationDuration = const Duration(milliseconds: 250);
+
+  bool _isPaused = false;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -42,6 +48,21 @@ class _VideoPostState extends State<VideoPost> {
   void initState() {
     super.initState();
     _initVideoPlayer();
+
+    _animationController = AnimationController(
+      duration: _animationDuration,
+      vsync: this,
+      lowerBound: 1.0,
+      upperBound: 1.5,
+      value: 1.5,
+    );
+
+    //_animationController의 value가 실시간으로  변화하는 것을 build가 알 수 있도록 전달
+    _animationController.addListener(
+      () {
+        setState(() {});
+      },
+    );
   }
 
   @override
@@ -60,21 +81,23 @@ class _VideoPostState extends State<VideoPost> {
   void _onTogglePause() {
     if (_videoPlayerController.value.isPlaying) {
       _videoPlayerController.pause();
+      _animationController.reverse();
     } else {
       _videoPlayerController.play();
+      _animationController.forward();
     }
+
+    setState(() {
+      _isPaused = !_isPaused;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    // print(_animationController.value);
     return VisibilityDetector(
       key: Key("${widget.index}"),
       onVisibilityChanged: _onVisibilityChanged,
-      // onVisibilityChanged: (info) {
-      //   print(
-      //     "Video: #${widget.index} is ${info.visibleFraction * 100}% visible",
-      //   );
-      // },
       child: Stack(
         children: [
           Positioned.fill(
@@ -89,14 +112,21 @@ class _VideoPostState extends State<VideoPost> {
               onTap: _onTogglePause,
             ),
           ),
-          const Positioned.fill(
+          Positioned.fill(
               //Positione은 언제나 Stack의 child여야 하기 때문에, IgnorePointer가 Center를 감싸줌.
               child: IgnorePointer(
             child: Center(
-              child: FaIcon(
-                FontAwesomeIcons.play,
-                color: Colors.white,
-                size: Sizes.size52,
+              child: Transform.scale(
+                scale: _animationController.value,
+                child: AnimatedOpacity(
+                  duration: _animationDuration,
+                  opacity: _isPaused ? 1 : 0,
+                  child: const FaIcon(
+                    FontAwesomeIcons.play,
+                    color: Colors.white,
+                    size: Sizes.size52,
+                  ),
+                ),
               ),
             ),
           ))

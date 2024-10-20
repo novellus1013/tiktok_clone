@@ -29,6 +29,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
     }
   }
 
+  //영상 재생이 끝난 후 page 이동에 대해 정의한 함수이기 때문에 video_timeline_screen에서 정의
   void _onVideoFinished() {
     _pageController.nextPage(
       duration: _scrollDuration,
