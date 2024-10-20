@@ -44,16 +44,29 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
     super.dispose();
   }
 
+  //Future.delayed 를 사용해서 Future 값이 존재하는 것처럼
+  Future<void> _onRefresh() {
+    return Future.delayed(
+      const Duration(seconds: 5),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      controller: _pageController,
-      onPageChanged: _onPageChanged,
-      itemCount: _itemCount,
-      scrollDirection: Axis.vertical,
-      itemBuilder: (context, index) => VideoPost(
-        // onVideoFinished: _onVideoFinished,
-        index: index,
+    return RefreshIndicator(
+      onRefresh: _onRefresh,
+      displacement: 50,
+      edgeOffset: 20,
+      color: Theme.of(context).primaryColor,
+      child: PageView.builder(
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
+        itemCount: _itemCount,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) => VideoPost(
+          // onVideoFinished: _onVideoFinished,
+          index: index,
+        ),
       ),
     );
   }
