@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_comments.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -73,7 +74,10 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
 
   void _onVisibilityChanged(VisibilityInfo info) {
     //유저가 scroll로 화면을 일부만 끌어올리면 재생되지 않고, 완전히 전환하면 재생됨
-    if (info.visibleFraction == 1 && !_videoPlayerController.value.isPlaying) {
+    if (info.visibleFraction == 1 &&
+        //pause하고 새로고침하면, 2자기 조건식을 모두 만족해서 pause된 상태로 재생되는 문제가 발생 => !_isPaused라는 조건식 추가
+        !_isPaused &&
+        !_videoPlayerController.value.isPlaying) {
       _videoPlayerController.play();
     }
   }
@@ -96,6 +100,20 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
     setState(() {
       _captionVisible = !_captionVisible;
     });
+  }
+
+  void _onCommentsTap(BuildContext context) async {
+    if (_videoPlayerController.value.isPlaying) {
+      _onTogglePause();
+    }
+    await showModalBottomSheet(
+      //BottomSheet의 background를 transparent로 설정해주어야 VideoComments에서 borderRadius적용한 걸 시각화 해서 볼 수 있음
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) => const VideoComments(),
+    );
+
+    _onTogglePause();
   }
 
   @override
@@ -195,12 +213,12 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 20,
             right: 10,
             child: Column(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
@@ -210,17 +228,20 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
                   child: Text("User"),
                 ),
                 Gaps.v24,
-                VideoButton(
+                const VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
                   text: '2.9M',
                 ),
                 Gaps.v24,
-                VideoButton(
-                  icon: FontAwesomeIcons.solidComment,
-                  text: '33.0K',
+                GestureDetector(
+                  onTap: () => _onCommentsTap(context),
+                  child: const VideoButton(
+                    icon: FontAwesomeIcons.solidComment,
+                    text: '33.0K',
+                  ),
                 ),
                 Gaps.v24,
-                VideoButton(
+                const VideoButton(
                   icon: FontAwesomeIcons.share,
                   text: 'Share',
                 ),
