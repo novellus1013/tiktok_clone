@@ -31,6 +31,8 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
   bool _isPaused = false;
   bool _captionVisible = false;
 
+  final String _inputCaption = "#Flutter #Challenge #NomadCoders";
+
   // void _onVideoChange() {
   //   if (_videoPlayerController.value.isInitialized) {
   //     if (_videoPlayerController.value.duration ==
@@ -168,9 +170,11 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
                 Gaps.v10,
                 Row(
                   children: [
-                    const Text(
-                      "#Flutter #Code Challenge",
-                      style: TextStyle(
+                    Text(
+                      _captionVisible
+                          ? _inputCaption
+                          : _inputCaption.substring(0, 20),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: Sizes.size16,
                       ),
@@ -179,13 +183,13 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
                     GestureDetector(
                       onTap: _onToggleCaption,
                       child: Text(
-                        _captionVisible ? "invisible" : "See more ...",
+                        _captionVisible ? "Close" : "... See more",
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: Sizes.size16,
                         ),
                       ),
-                    ),
+                    )
                   ],
                 )
               ],
