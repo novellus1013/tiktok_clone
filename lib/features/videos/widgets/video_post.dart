@@ -56,13 +56,6 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
       upperBound: 1.5,
       value: 1.5,
     );
-
-    //_animationController의 value가 실시간으로  변화하는 것을 build가 알 수 있도록 전달
-    _animationController.addListener(
-      () {
-        setState(() {});
-      },
-    );
   }
 
   @override
@@ -116,8 +109,16 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
               //Positione은 언제나 Stack의 child여야 하기 때문에, IgnorePointer가 Center를 감싸줌.
               child: IgnorePointer(
             child: Center(
-              child: Transform.scale(
-                scale: _animationController.value,
+              child: AnimatedBuilder(
+                animation: _animationController,
+                //builder는 _animationController의 값이 변할 때 마다 실행
+                builder: (context, child) {
+                  return Transform.scale(
+                    scale: _animationController.value,
+                    //child는 AnimatedBuilder의 child를 가리킨다.
+                    child: child,
+                  );
+                },
                 child: AnimatedOpacity(
                   duration: _animationDuration,
                   opacity: _isPaused ? 1 : 0,
