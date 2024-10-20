@@ -52,6 +52,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
+      //keyboard가 모습을 드러낼 때, 키보드가 다른 ui요소를 가리지 않도록 flutter 화면을 조절하는 기본이 true인 옵션
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Offstage(

@@ -109,6 +109,8 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
     await showModalBottomSheet(
       //BottomSheet의 background를 transparent로 설정해주어야 VideoComments에서 borderRadius적용한 걸 시각화 해서 볼 수 있음
       backgroundColor: Colors.transparent,
+      //bottomsheet의 크기를 변경 가능하게 해주는 옵션
+      isScrollControlled: true,
       context: context,
       builder: (context) => const VideoComments(),
     );
