@@ -38,7 +38,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   void _onPostVideoButtonTap() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        // fullscreenDialog: true,
+        fullscreenDialog: true,
         builder: (context) {
           return Scaffold(
             appBar: AppBar(title: const Text("Record video")),
@@ -76,7 +76,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.black,
+        color: _selectedIndex == 0 ? Colors.black : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(
             Sizes.size12,
@@ -90,6 +90,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.house,
                 isSelected: _selectedIndex == 0,
                 onTap: () => _onTap(0),
+                selectedIndex: _selectedIndex,
               ),
               NavTab(
                 text: 'Discover',
@@ -97,6 +98,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidCompass,
                 isSelected: _selectedIndex == 1,
                 onTap: () => _onTap(1),
+                selectedIndex: _selectedIndex,
               ),
               Gaps.h24,
               GestureDetector(
@@ -105,6 +107,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 onLongPressUp: _onLongPressedUp,
                 child: PostVideoButton(
                   isPressed: _isPressed,
+                  inverted: _selectedIndex != 0,
                 ),
               ),
               Gaps.h24,
@@ -114,6 +117,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidMessage,
                 isSelected: _selectedIndex == 3,
                 onTap: () => _onTap(3),
+                selectedIndex: _selectedIndex,
               ),
               NavTab(
                 text: 'Profile',
@@ -121,6 +125,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidUser,
                 isSelected: _selectedIndex == 4,
                 onTap: () => _onTap(4),
+                selectedIndex: _selectedIndex,
               ),
             ],
           ),
